@@ -13,7 +13,7 @@ const MainmenuButtons = () => (
   paddingRight: 20}}>
       <TouchableOpacity onPress={()=> (alert('Lampada!'))}>
 
-        <Image source={require('./icons/Lamp.png')} style={{width: 30, height: 45, resizeMode: 'center', marginTop: 15}}/>
+        <Image source={require('./icons/Lamp.png')} style={{width: 30, height: 45, resizeMode: 'center', marginTop: 18}}/>
       
       </TouchableOpacity>
 
