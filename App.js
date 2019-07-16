@@ -6,6 +6,8 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableWithoutFeedback,
+  AppRegistry
 } from 'react-native';
 
 import {
@@ -16,30 +18,22 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import MainMenu from './src/mainMenu';
+
 const App = () => {
   return (
+    <View style={{backgroundColor: '#55b15e', flex: 1}}> 
+      
+      
+      <MainMenu/>
 
-    <Text style={styles.textStyle}>SUA</Text>
-    
+
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  
-  textStyle: {
-    fontSize: 20,
-    color: 'green',
-    padding: 20
-  },
 
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
+
+
