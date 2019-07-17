@@ -7,6 +7,8 @@ import {
   Alert
 } from 'react-native';
 
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+
 const MainmenuButtons = () => (
   <View style={{ flex: 1, backgroundColor: '#55b15e' }}>
     <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingTop: 10, paddingLeft: 20,
@@ -62,7 +64,6 @@ const MainmenuButtons = () => (
     </View>
     <View style={{flex: 1}}/>
   </View>
-  
 
 
 )

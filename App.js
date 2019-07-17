@@ -19,15 +19,12 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import MainMenu from './src/mainMenu';
+import Notes from './src/notes';
 
 const App = () => {
   return (
-    <View style={{backgroundColor: '#55b15e', flex: 1}}> 
-      
-      
-      <MainMenu/>
-
-
+    <View style={{ backgroundColor: '#55b15e', flex: 1 }}>
+      <Notes/>
     </View>
   );
 };
