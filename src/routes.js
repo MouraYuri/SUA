@@ -9,7 +9,18 @@ import {
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-const MainmenuButtons = () => (
+import Notes from './notes';
+
+/*const Routes = createAppContainer(
+  createStackNavigator({
+    NotesScreen: Notes,
+    MainMenuScreen: MainmenuButtons
+
+  })
+)
+*/
+
+const MainmenuButtons = ({ navigation }) => (
   <View style={{ flex: 1, backgroundColor: '#55b15e' }}>
     <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingTop: 10, paddingLeft: 20,
   paddingRight: 20}}>
@@ -46,7 +57,7 @@ const MainmenuButtons = () => (
         <Image source={require('./icons/Calendario.png')} style={styles.menuButtons} />
 
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => Alert.alert("Anotações!")}>
+      <TouchableOpacity onPress={() => navigation.navigate('Notes')}>
 
         <Image source={require('./icons/Anotações.png')} style={styles.menuButtons} />
 
@@ -67,6 +78,10 @@ const MainmenuButtons = () => (
 
 
 )
+
+MainmenuButtons.navigatorOptions = {
+  title: 'MainMenu'
+}
 
 const styles = StyleSheet.create({
   
