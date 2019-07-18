@@ -3,28 +3,22 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Image,
-  Alert,
-  Text
+  Image
 } from 'react-native';
 
-import {createStackNavigator, createAppContainer} from 'react-navigation';
-
-const Notes = ( {navigation}) => (
-    <View style={{ flex: 1, backgroundColor: '#55b15e' }}>
+const Calendar = ( {navigation}) => (
+    <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
 
-                <Image source={require('./icons/Return.png')} style={styles.returnButton}/>
+                <Image source={require('../icons/Flecha.png')} style={styles.returnButton}/>
 
             </TouchableOpacity>
-
-            <Text style={{width: 60, height: 60, color: 'white'}}>Anotações</Text>
-            
+			<Image source={require('../icons/Notes.png')} style={{resizeMode: 'center', width: 30, height: 30, flex: 2, marginLeft: 40}} />            
             <TouchableOpacity>
 
-                <Image source={require('./icons/MoreOptions.png')} style={{resizeMode: 'center',
-                width: 70, height: 70, tintColor: 'white', paddingLeft: 30, marginBottom: 10, marginLeft: 20}} />
+                <Image source={require('../icons/Opções.png')} style={{resizeMode: 'center',
+                width: 70, height: 70, tintColor: 'white', paddingLeft: 30, marginBottom: 10, marginLeft: 20, flex: 1}} />
 
             </TouchableOpacity>
         </View>
@@ -37,18 +31,13 @@ const Notes = ( {navigation}) => (
 
             <TouchableOpacity>
 
-                <Image source={require('./icons/PlusIcon.png')} style={{
-                    resizeMode: 'center', width: 40, height: 60, tintColor: 'white',
-
+                <Image source={require('../icons/Add.png')} style={{
+                    resizeMode: 'center', width: 60, height: 60,
                 }} />
 
             </TouchableOpacity>
 
         </View>
-
-
-
-
 
     </View>
 )
@@ -58,11 +47,18 @@ const styles = StyleSheet.create({
 
     returnButton: {
     resizeMode: 'center',
-    width: 30, height: 25, 
+    width: 30, 
+    height: 25, 
     marginTop: 20, 
     marginLeft: 15, 
     tintColor: 'white',
-    marginBottom: 30
+		marginBottom: 30,
+		flex: 1
+    },
+
+    backgroundApp: {
+    	flex: 1,
+      backgroundColor: '#55b15e',
     },
 
     headerStyle: {
@@ -70,10 +66,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center'
-
     }
 
 })
 
-
-export default Notes;
+export default Calendar;
