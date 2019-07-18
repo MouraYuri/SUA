@@ -10,27 +10,17 @@ import {
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 import Notes from './notes';
-import Mainmenu from './mainMenu';
 
-const Routes = createAppContainer(
+/*const Routes = createAppContainer(
   createStackNavigator({
-    MainMenuScren: {
-      screen: Mainmenu,
-      navigationOptions: {
-        header: null,
-      }
-    },
-    NotesScreen: {
-      screen: Notes,
-      navigationOptions: {
-        header: null,
-      }
-    }
+    NotesScreen: Notes,
+    MainMenuScreen: MainmenuButtons
 
   })
 )
+*/
 
-/*const MainmenuButtons = ({ navigation }) => (
+const Mainmenu = ({ navigation }) => (
   <View style={{ flex: 1, backgroundColor: '#55b15e' }}>
     <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingTop: 10, paddingLeft: 20,
   paddingRight: 20}}>
@@ -67,7 +57,7 @@ const Routes = createAppContainer(
         <Image source={require('./icons/Calendario.png')} style={styles.menuButtons} />
 
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Notes')}>
+      <TouchableOpacity onPress={() => navigation.navigate('NotesScreen')}>
 
         <Image source={require('./icons/Anotações.png')} style={styles.menuButtons} />
 
@@ -89,9 +79,6 @@ const Routes = createAppContainer(
 
 )
 
-MainmenuButtons.navigatorOptions = {
-  title: 'MainMenu'
-}
 
 const styles = StyleSheet.create({
   
@@ -104,6 +91,4 @@ const styles = StyleSheet.create({
 
   });
 
-  export default MainmenuButtons;
-  */
-  export default Routes;
+  export default Mainmenu;

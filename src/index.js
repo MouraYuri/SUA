@@ -4,7 +4,8 @@ import Routes from './routes';
 
 import Notes from './notes';
 
+
 export default function App() {
-    return <Notes/>;
+    return <Routes/>;
 
 }

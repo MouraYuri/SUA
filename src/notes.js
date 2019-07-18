@@ -10,10 +10,10 @@ import {
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-const Notes = () => (
+const Notes = ( {navigation}) => (
     <View style={{ flex: 1, backgroundColor: '#55b15e' }}>
         <View style={styles.headerStyle}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
 
                 <Image source={require('./icons/Return.png')} style={styles.returnButton}/>
 
@@ -53,9 +53,6 @@ const Notes = () => (
     </View>
 )
 
-Notes.navigationOptions = {
-    title: 'Notes'
-}
 
 const styles = StyleSheet.create({
 
