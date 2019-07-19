@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 
 import NoteList from './noteList'
@@ -14,11 +15,13 @@ state = {
     notes: [
         {id:1, title: 'first', date:'04/06/2000', content: 'first note'},
         {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-    ]
+        {id:3, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:4, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:5, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:6, title: 'second', date: '30/08/1998', content: 'second note'},
+    ],
+
+    screenHeight: 0
 
 }
 
@@ -28,6 +31,20 @@ addNote  = () => {
     alert("new note added!");
 }
 
+// const {height} = Dimensions.get('window');
+
+// onContentSizeChange = (contentWidth, contentHeight) => {
+//     this.state.screenHeight = contentHeight;
+//     alert('size changed');
+//     if (scrollEnabled){
+//         alert('ScrollEnabled true!');
+//     }
+
+// }
+
+// const scrollEnabled = this.state.screenHeight > height;
+
+const scrollEnabled = true
 
 const Notes = ( {navigation}) => (
     <View style={ styles.backgroundApp }>
@@ -46,8 +63,11 @@ const Notes = ( {navigation}) => (
             </TouchableOpacity>
         </View>
         <View style={{flex: 5, paddingBottom: 20}}>
-            <ScrollView>
-                <View style={{
+            <ScrollView 
+            scrollEnabled={this.scrollEnabled}
+            contentContainerStyle={{justifyContent: 'space-between'}} 
+            >
+                 <View style={{
                     flex: 5, alignItems: 'center',
                     flexDirection: 'column', justifyContent: 'space-between'
                 }}>
@@ -55,9 +75,11 @@ const Notes = ( {navigation}) => (
                     <NoteList note={this.state.notes}/>
 
                 </View>
+            
+            </ScrollView>
 
-
-                <View style={{ flex: 1, flexDirection: 'row-reverse', margin: 20 }}>
+                <View style={{position: 'absolute', zIndex: 1, end: 1, top: '80%'
+                            }}>
 
                     <TouchableOpacity onPress={() => this.addNote()}>
 
@@ -68,7 +90,7 @@ const Notes = ( {navigation}) => (
                     </TouchableOpacity>
 
                 </View>
-            </ScrollView>
+            
         </View>
     </View>
 )
