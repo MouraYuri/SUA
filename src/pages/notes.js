@@ -4,15 +4,20 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 
 import NoteList from './noteList'
 
 state = {
     notes: [
-        //{id:1, title: 'first', date:'04/06/2000', content: 'first note'},
-        //{id:2, title: 'second', date: '30/08/1998', content: 'second note'}
+        {id:1, title: 'first', date:'04/06/2000', content: 'first note'},
+        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
+        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
     ]
 
 }
@@ -40,25 +45,31 @@ const Notes = ( {navigation}) => (
 
             </TouchableOpacity>
         </View>
+        <View style={{flex: 5, paddingBottom: 20}}>
+            <ScrollView>
+                <View style={{
+                    flex: 5, alignItems: 'center',
+                    flexDirection: 'column', justifyContent: 'space-between'
+                }}>
 
-        <View style={{flex: 5, alignItems: 'center', flexDirection: 'column', justifyContent:'space-between'}}>
+                    <NoteList note={this.state.notes}/>
 
-            <NoteList note={this.state.notes}/>
+                </View>
 
+
+                <View style={{ flex: 1, flexDirection: 'row-reverse', margin: 20 }}>
+
+                    <TouchableOpacity onPress={() => this.addNote()}>
+
+                        <Image source={require('../icons/Add.png')} style={{
+                            resizeMode: 'center', width: 60, height: 60,
+                        }} />
+
+                    </TouchableOpacity>
+
+                </View>
+            </ScrollView>
         </View>
-
-        <View style={{ flex: 1, flexDirection:'row-reverse', margin: 20 }}>
-
-            <TouchableOpacity onPress={() => this.addNote()}>
-
-                <Image source={require('../icons/Add.png')} style={{
-                    resizeMode: 'center', width: 60, height: 60,
-                }} />
-
-            </TouchableOpacity>
-
-        </View>
-
     </View>
 )
 
@@ -85,7 +96,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 
 })

@@ -21,7 +21,7 @@ const NoteList = ( props ) => {
 
 const styles = StyleSheet.create({
     noteStyle: {
-        width: '80%', height: '40%', backgroundColor: 'white'
+        width: '80%', height: '30%', backgroundColor: 'white', marginTop: 20
     }
 
 
