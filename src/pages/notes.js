@@ -7,6 +7,23 @@ import {
   Text
 } from 'react-native';
 
+import NoteList from './noteList'
+
+state = {
+    notes: [
+        //{id:1, title: 'first', date:'04/06/2000', content: 'first note'},
+        //{id:2, title: 'second', date: '30/08/1998', content: 'second note'}
+    ]
+
+}
+
+addNote  = () => {
+    this.state.notes.push({id: 3, title: 'thirty', date: '07/06/2019',
+    content: 'now its gonna work!!'})
+    alert("new note added!");
+}
+
+
 const Notes = ( {navigation}) => (
     <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
@@ -24,13 +41,15 @@ const Notes = ( {navigation}) => (
             </TouchableOpacity>
         </View>
 
-        <View style={{flex: 5}}>
+        <View style={{flex: 5, alignItems: 'center', flexDirection: 'column', justifyContent:'space-between'}}>
+
+            <NoteList note={this.state.notes}/>
 
         </View>
 
         <View style={{ flex: 1, flexDirection:'row-reverse', margin: 20 }}>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.addNote()}>
 
                 <Image source={require('../icons/Add.png')} style={{
                     resizeMode: 'center', width: 60, height: 60,
@@ -70,5 +89,9 @@ const styles = StyleSheet.create({
     }
 
 })
+
+
+
+
 
 export default Notes;
