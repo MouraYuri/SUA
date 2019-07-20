@@ -72,7 +72,7 @@ const Notes = ( {navigation}) => (
                     flexDirection: 'column', justifyContent: 'space-between'
                 }}>
 
-                    <NoteList note={this.state.notes}/>
+                    <NoteList note={this.state.notes} navigation={navigation}/>
 
                 </View>
             
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
+        height: '20%'
     }
 
 })

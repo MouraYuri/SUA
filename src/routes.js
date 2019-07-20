@@ -7,6 +7,7 @@ import Calender from './pages/calender';
 import Schedule from './pages/schedule';
 import Subjects from './pages/subjects';
 import Cardgrade from './pages/cardgrade';
+import EditNotes from './pages/editNote';
 
 const Routes = createAppContainer(
   createStackNavigator({
@@ -50,9 +51,14 @@ const Routes = createAppContainer(
       screen: Cardgrade,
       navigationOptions: {
         header: null,
-      }
+      },
     },
-
+    EditNoteScreen: {
+      screen: EditNotes,
+      navigationOptions: {
+        header: null
+      }
+    }
 
   })
 )
