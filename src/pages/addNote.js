@@ -9,29 +9,48 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+import {Component} from 'react';
 
-// state = {
-//     noteToUpdate: {id:0, title: '', date:'', content: ''},
+toBeSaved = {
+    id: 0,
+    title: 'DEFAULT',
+    date: '',
+    content: '',
+    newNote: false
+}
 
-// }
 
-// updateTitle = (value) => {
-//     this.state.noteToUpdate.title = value;
-
-// }
-
-// updateDate = (value) => {
-//     this.state.noteToUpdate.date = value;
 
 // }
 
-// updateContent = (value) => {
-//     this.state.noteToUpdate.content = value;
+ onchangeTitle = (title) => {
+    this.toBeSaved.title = title;
+    this.toBeSaved.newNote = true;
+ }  
+
+onchangeDate = (date) => {
+    this.toBeSaved.date = date;
+}
+
+onchangeContent = (content) => {
+    this.toBeSaved.content = content;
+}
+
+// const updateNotes = () => {
+//     const notes = navigation.getParam('notes');
+//     notes.push(this.toBeSaved);
+//     alert('Updated!!');
 // }
-const EditNotes = ( {navigation}) => {
+
+
+const AddNote = ( {navigation}) =>{
     
-
-
+    function updateNotes() {
+        const notes = navigation.getParam('notes');
+        notes.push(this.toBeSaved);
+        alert(this.toBeSaved.title);
+    }
+    
     return(
     <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
@@ -42,7 +61,7 @@ const EditNotes = ( {navigation}) => {
             </TouchableOpacity>
                             <Image source={require('../icons/Notes.png')} style={{resizeMode: 'center', width: 30,
                              height: 30, flex: 2, marginLeft: 15}} />            
-            <TouchableOpacity style={{paddingRight: '3%'}}>
+            <TouchableOpacity style={{paddingRight: '3%'}}  onPress={() => navigation.goBack()}>
 
                 <Image source={require('../icons/DeleteIcon.png')} style={{resizeMode: 'center',
                 width: 40, height: 40, tintColor: 'white', marginLeft: 15, flex: 1}} />
@@ -59,8 +78,10 @@ const EditNotes = ( {navigation}) => {
                 <Text style={{ fontSize: 20, color: 'black', width: '80%', height: '25%'}}>Título</Text>
                 <View style={{ width: '100%', backgroundColor: 'white', height: '55%', borderRadius: 10}}>
 
-                    <TextInput style={{ flex: 1, fontWeight: 'bold', fontSize: 15 }} autoCapitalize={'characters'} 
-                    value={navigation.getParam('title')}/>
+                    <TextInput style={{ flex: 1, fontWeight: 'bold', fontSize: 15 }}
+                     autoCapitalize={'characters'}
+                     onChangeText={(title) => this.onchangeTitle(title)}
+                     />
 
                 </View>
             </View>
@@ -72,8 +93,7 @@ const EditNotes = ( {navigation}) => {
                 <View style={{ width: '100%', backgroundColor: 'white', height: '55%', borderRadius: 10}}>
 
                     <TextInput style={{ flex: 1,fontSize: 15 }}
-                    value={navigation.getParam('date')}
-                    />
+                    onChangeText={(date) => this.onchangeDate(date)}/>
 
                 </View>
             </View>
@@ -88,8 +108,7 @@ const EditNotes = ( {navigation}) => {
 
                     <TextInput style={{ flex: 1, fontSize: 15 }} multiline={true}
                     scrollEnabled={true} maxLength={400}
-                    value={navigation.getParam('content')} 
-                    />
+                    onChangeText={(content) => this.onchangeContent(content)}/>
 
                 </View>
             </View>
@@ -101,7 +120,7 @@ const EditNotes = ( {navigation}) => {
 
         <View style={{flex: 1, flexDirection: 'row-reverse', width: '100%'}}>
 
-            <TouchableOpacity onPress={() => alert('disgraça', 'disgraça')} style={{paddingTop: '3%', paddingBottom: '3%', paddingRight: '3%' }}>
+            <TouchableOpacity onPress={() => updateNotes()} style={{paddingTop: '3%', paddingBottom: '3%', paddingRight: '3%' }}>
 
                 <Image source={require('../icons/SaveIcon.png')} style={{
                     resizeMode: 'center', width: 60, height: 60, borderRadius: 100,
@@ -147,4 +166,5 @@ const styles = StyleSheet.create({
 
 
 
-export default EditNotes;
+export default AddNote;
+export const caraio = this.toBeSaved; 

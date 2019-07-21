@@ -12,7 +12,11 @@ const NoteList = ( props ) => {
     return (
     props.note.map((note, id) => (
         <View key={id} style={styles.noteStyle}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('EditNoteScreen')} style={{flex: 1}}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('EditNoteScreen', {
+                title: note.title,
+                date: note.date,
+                content: note.content,
+            })} style={{flex: 1}}>
                 <View>
                     <Text style={{ fontSize: 20, color: 'black', alignSelf: 'center', fontWeight: 'bold' }}>{note.title}</Text>
                     <Text style={{ fontSize: 15, color: 'black', marginLeft: 10 }}>{note.date}</Text>

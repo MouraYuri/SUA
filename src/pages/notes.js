@@ -9,7 +9,8 @@ import {
   Dimensions
 } from 'react-native';
 
-import NoteList from './noteList'
+import NoteList from './noteList';
+import caraio from './addNote';
 
 state = {
     notes: [
@@ -19,17 +20,9 @@ state = {
         {id:4, title: 'second', date: '30/08/1998', content: 'second note'},
         {id:5, title: 'second', date: '30/08/1998', content: 'second note'},
         {id:6, title: 'second', date: '30/08/1998', content: 'second note'},
-    ],
-
-    screenHeight: 0
-
+    ]
 }
 
-addNote  = () => {
-    this.state.notes.push({id: 3, title: 'thirty', date: '07/06/2019',
-    content: 'now its gonna work!!'})
-    alert("new note added!");
-}
 
 // const {height} = Dimensions.get('window');
 
@@ -46,7 +39,19 @@ addNote  = () => {
 
 const scrollEnabled = true
 
-const Notes = ( {navigation}) => (
+
+const Notes = ( {navigation}) => { 
+    
+    const updateState = () => {
+        if (caraio.newNote) {
+            this.state.notes.push(caraio);
+        }
+        alert('updateStateFunction');
+    }
+
+    updateState();
+    
+    return (
     <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -81,7 +86,7 @@ const Notes = ( {navigation}) => (
                 <View style={{position: 'absolute', zIndex: 1, end: 1, top: '80%'
                             }}>
 
-                    <TouchableOpacity onPress={() => this.addNote()}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddNoteScreen', {notes: this.state.notes})}>
 
                         <Image source={require('../icons/Add.png')} style={{
                             resizeMode: 'center', width: 60, height: 60,
@@ -94,14 +99,14 @@ const Notes = ( {navigation}) => (
         </View>
     </View>
 )
-
+}
 
 const styles = StyleSheet.create({
 
     returnButton: {
 			resizeMode: 'center',
-			width: 30, 
-			height: 25, 
+			width: 19, 
+			height: 19, 
 			marginTop: 20, 
 			marginLeft: 15, 
 			tintColor: 'white',
