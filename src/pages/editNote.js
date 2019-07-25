@@ -9,6 +9,9 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+import getRealm from '../../services/realm';
+import NotesSchema from '../schemas/notesSchema';
+
 
 // state = {
 //     noteToUpdate: {id:0, title: '', date:'', content: ''},
@@ -28,7 +31,33 @@ import {
 // updateContent = (value) => {
 //     this.state.noteToUpdate.content = value;
 // }
-const EditNotes = ( {navigation}) => {
+
+
+const EditNotes = ( {navigation} ) => {
+
+    async function deleteNotes(navigation){
+        try {
+            const realm = await getRealm();
+
+            realm.write(() => {
+
+                const dataToBeDeleted = realm.objectForPrimaryKey(ID);
+
+                realm.delete(dataToBeDeleted);
+
+            })
+        }
+        catch (error){
+            alert('an error has ocurred!');
+        }
+        
+    }
+
+    state = {
+        note: {id: navigation.getParam('id'),title: navigation.getParam('title')
+        ,date: navigation.getParam('date'),content: navigation.getParam('content'),}
+    }
+
     
 
 
@@ -45,7 +74,8 @@ const EditNotes = ( {navigation}) => {
             <TouchableOpacity style={{paddingRight: '3%'}}>
 
                 <Image source={require('../icons/DeleteIcon.png')} style={{resizeMode: 'center',
-                width: 40, height: 40, tintColor: 'white', marginLeft: 15, flex: 1}} />
+                width: 40, height: 40, tintColor: 'white', marginLeft: 15, flex: 1}}
+                onPress={(navigation) => deleteNotes(navigation)} />
 
             </TouchableOpacity>
         </View>
@@ -60,7 +90,7 @@ const EditNotes = ( {navigation}) => {
                 <View style={{ width: '100%', backgroundColor: 'white', height: '55%', borderRadius: 10}}>
 
                     <TextInput style={{ flex: 1, fontWeight: 'bold', fontSize: 15 }} autoCapitalize={'characters'} 
-                    value={navigation.getParam('title')}/>
+                    value={state.note.title}/>
 
                 </View>
             </View>
@@ -72,7 +102,7 @@ const EditNotes = ( {navigation}) => {
                 <View style={{ width: '100%', backgroundColor: 'white', height: '55%', borderRadius: 10}}>
 
                     <TextInput style={{ flex: 1,fontSize: 15 }}
-                    value={navigation.getParam('date')}
+                    value={state.note.date}
                     />
 
                 </View>
@@ -88,7 +118,7 @@ const EditNotes = ( {navigation}) => {
 
                     <TextInput style={{ flex: 1, fontSize: 15 }} multiline={true}
                     scrollEnabled={true} maxLength={400}
-                    value={navigation.getParam('content')} 
+                    value={state.note.content} 
                     />
 
                 </View>

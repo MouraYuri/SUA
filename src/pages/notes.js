@@ -9,19 +9,15 @@ import {
   Dimensions
 } from 'react-native';
 
-import NoteList from './noteList';
-import caraio from './addNote';
+import AsyncStorage from '@react-native-community/async-storage';
 
-state = {
-    notes: [
-        {id:1, title: 'first', date:'04/06/2000', content: 'first note'},
-        {id:2, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:3, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:4, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:5, title: 'second', date: '30/08/1998', content: 'second note'},
-        {id:6, title: 'second', date: '30/08/1998', content: 'second note'},
-    ]
-}
+import NoteList from './noteList';
+
+// state = {
+//     notes: [
+//         {id: 0, title: 'first', date:'04/06/2000', content: 'first note'},
+//     ]
+// }
 
 
 // const {height} = Dimensions.get('window');
@@ -41,15 +37,6 @@ const scrollEnabled = true
 
 
 const Notes = ( {navigation}) => { 
-    
-    const updateState = () => {
-        if (caraio.newNote) {
-            this.state.notes.push(caraio);
-        }
-        alert('updateStateFunction');
-    }
-
-    updateState();
     
     return (
     <View style={ styles.backgroundApp }>
@@ -86,7 +73,7 @@ const Notes = ( {navigation}) => {
                 <View style={{position: 'absolute', zIndex: 1, end: 1, top: '80%'
                             }}>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('AddNoteScreen', {notes: this.state.notes})}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddNoteScreen', {notes: this.state.notes,})}>
 
                         <Image source={require('../icons/Add.png')} style={{
                             resizeMode: 'center', width: 60, height: 60,

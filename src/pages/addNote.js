@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,22 +10,49 @@ import {
 } from 'react-native';
 
 import {Component} from 'react';
+import getRealm from '../../services/realm';
+
+
+
+
 
 toBeSaved = {
-    id: 0,
+    id: null,
     title: 'DEFAULT',
     date: '',
     content: '',
-    newNote: false
+    
 }
 
+state = {
+    notes: []
+}
 
+// async function saveNote(note) { //uso do await necessário para o uso
+//     const data = {
+//         //id: note.id,
+//         title: note.title,
+//         date: note.date,
+//         content: note.content,
+        
+//     }
+
+//     const realm = await getRealm();
+
+//     realm.write(() => {
+//         realm.create('NotesSchema', data);
+//     });
+
+//     alert(data.title);
+
+//     navigation.goBack();
 
 // }
 
+
  onchangeTitle = (title) => {
     this.toBeSaved.title = title;
-    this.toBeSaved.newNote = true;
+    
  }  
 
 onchangeDate = (date) => {
@@ -36,21 +63,49 @@ onchangeContent = (content) => {
     this.toBeSaved.content = content;
 }
 
-// const updateNotes = () => {
-//     const notes = navigation.getParam('notes');
-//     notes.push(this.toBeSaved);
-//     alert('Updated!!');
-// }
+// // const updateNotes = (key, notes) => {
+// //     // notes.push(this.toBeSaved);
+// //     // storeData(key, notes);
+// //     alert('Updated!!');
+// // }
+
 
 
 const AddNote = ( {navigation}) =>{
+    async function saveNote(note) { //uso do await necessário para o uso
+
+        const data = {
+            id: this.state.notes.length,
+            title: note.title,
+            date: note.date,
+            content: note.content,
+            
+        }
     
-    function updateNotes() {
-        const notes = navigation.getParam('notes');
-        notes.push(this.toBeSaved);
-        alert(this.toBeSaved.title);
+        const realm = await getRealm();
+    
+        realm.write(() => {
+            realm.create('NotesSchema', data);
+        });
+    
     }
+
+    useEffect(() => {
+        async function loadNotes() {
+            const realm = await getRealm();
     
+            const data = realm.objects('NotesSchema');
+    
+            this.state.notes = data;
+        }
+        loadNotes();
+    
+    
+    }, []);    
+
+
+
+
     return(
     <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
@@ -120,7 +175,7 @@ const AddNote = ( {navigation}) =>{
 
         <View style={{flex: 1, flexDirection: 'row-reverse', width: '100%'}}>
 
-            <TouchableOpacity onPress={() => updateNotes()} style={{paddingTop: '3%', paddingBottom: '3%', paddingRight: '3%' }}>
+            <TouchableOpacity onPress={() => saveNote(toBeSaved)} style={{paddingTop: '3%', paddingBottom: '3%', paddingRight: '3%' }}>
 
                 <Image source={require('../icons/SaveIcon.png')} style={{
                     resizeMode: 'center', width: 60, height: 60, borderRadius: 100,
@@ -167,4 +222,3 @@ const styles = StyleSheet.create({
 
 
 export default AddNote;
-export const caraio = this.toBeSaved; 
