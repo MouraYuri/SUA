@@ -35,32 +35,27 @@ import NotesSchema from '../schemas/notesSchema';
 
 const EditNotes = ( {navigation} ) => {
 
-    async function deleteNotes(navigation){
-        try {
+    async function deleteNotes(ID, navigation){
             const realm = await getRealm();
 
             realm.write(() => {
 
-                const dataToBeDeleted = realm.objectForPrimaryKey(ID);
+                let dataToBeDeleted = realm.objects('NotesSchema').filtered('id = '+ID);
 
                 realm.delete(dataToBeDeleted);
 
             })
         }
-        catch (error){
-            alert('an error has ocurred!');
-        }
-        
-    }
 
     state = {
         note: {id: navigation.getParam('id'),title: navigation.getParam('title')
         ,date: navigation.getParam('date'),content: navigation.getParam('content'),}
     }
 
+    const ID = navigation.getParam('id');
+
+    alert(ID);
     
-
-
     return(
     <View style={ styles.backgroundApp }>
         <View style={styles.headerStyle}>
@@ -75,7 +70,7 @@ const EditNotes = ( {navigation} ) => {
 
                 <Image source={require('../icons/DeleteIcon.png')} style={{resizeMode: 'center',
                 width: 40, height: 40, tintColor: 'white', marginLeft: 15, flex: 1}}
-                onPress={(navigation) => deleteNotes(navigation)} />
+                onPress={(ID, navigation) => deleteNotes(ID, navigation)} />
 
             </TouchableOpacity>
         </View>

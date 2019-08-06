@@ -61,7 +61,7 @@ const Notes = ( {navigation}) => {
             >
                  <View style={{
                     flex: 5, alignItems: 'center',
-                    flexDirection: 'column', justifyContent: 'space-between'
+                    flexDirection: 'column', justifyContent: 'space-between', width: '100%'
                 }}>
 
                     <NoteList note={this.state.notes} navigation={navigation}/>

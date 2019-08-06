@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  FlatList
 } from 'react-native';
 import getRealm from '../../services/realm';
 
@@ -42,7 +43,6 @@ const NoteList = ( props ) => {
     
             this.state.notes = data;
             
-            alert(data.title);
         }
         
         loadNotes();
@@ -50,28 +50,31 @@ const NoteList = ( props ) => {
 
 
     return (
-    this.state.notes.map((notes, id) => (
-        <View key={id} style={styles.noteStyle}>
+        <View style={{flex: 1}}>
+        <FlatList
+        data={this.state.notes}
+        renderItem={({item}) => 
+            <View style={styles.noteStyle}>
             <TouchableOpacity onPress={() => props.navigation.navigate('EditNoteScreen', {
-                id: notes.id,
-                title: notes.title,
-                date: notes.date,
-                content: notes.content,
-                fullNote: notes,
+                id: item.id,
+                title: item.title,
+                date: item.date,
+                content: item.content,
             })} style={{flex: 1}}>
                 <View>
-                    <Text style={{ fontSize: 20, color: 'black', alignSelf: 'center', fontWeight: 'bold' }}>{notes.title}</Text>
-                    <Text style={{ fontSize: 15, color: 'black', marginLeft: 10 }}>{notes.date}</Text>
-                    <Text style={{ fontSize: 15, color: 'black', marginLeft: 10 }}>{notes.content}</Text>
+                    <Text style={{ fontSize: 20, color: 'black', alignSelf: 'center', fontWeight: 'bold' }}>{item.title}</Text>
+                    <Text style={{ fontSize: 15, color: 'black', marginLeft: 10 }}>{item.date}</Text>
+                    <Text style={{ fontSize: 15, color: 'black', marginLeft: 10 }}>{item.content}</Text>
                 </View>
             </TouchableOpacity>
+        </View>} numColumns={1}
+        />
         </View>
-    ))
-)}
+        )}
 
 const styles = StyleSheet.create({
     noteStyle: {
-        width: '80%', height: 160, backgroundColor: 'white', marginTop: 20, borderRadius: 10
+        width: '100%', height: 140, backgroundColor: 'white', marginTop: 20, borderRadius: 10
     }
 
 
